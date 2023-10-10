@@ -1,0 +1,32 @@
+---
+version: "2.1"
+services:
+  bazarr:     # Normal Resolution Instance (720p/1080p)
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=EST
+    volumes:
+      - ~/docky/bazarr/configs:/config     # volume mounted configuration folder
+      - /mnt/NAS/shows:/tv                 # volume mounted TV
+      - /mnt/NAS/movies:/movies            # volume mounted movies
+    ports:
+      - 6767:6767    # port mappings have to be different between installations
+    restart: unless-stopped
+  
+  bazarr2:    # 4K Resolution (4K/2160p)
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr4k
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=EST
+    volumes:
+      - ~/docky/bazarr4k/configs:/config   # volume mounted configuration folder
+      - /mnt/NAS/4kcontent/shows:/tv       # volume mounted 4K TV
+      - /mnt/NAS/4kcontent/movies:/movies  # volume mounted movies
+    ports:
+      - 6769:6767     # port mappings have to be different between installations
+    restart: unless-stopped
