@@ -1,0 +1,32 @@
+---
+version: "2.1"
+services:
+  sonarr:     # Normal Resolution Instance (720p/1080p)
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=EST
+    volumes:
+      - ~/docky/sonarr/configs:/config     # volume mounted configuration folder
+      - /mnt/NAS/shows:/tv                 # volume mounted TV
+      - /mnt/NAS/downloads:/downloads      # volume mounted downloads
+    ports:
+      - 8989:8989    # port mappings have to be different between installations
+    restart: unless-stopped
+  
+  sonarr2:    # 4K Resolution (4K/2160p)
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr4k
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=EST
+    volumes:
+      - ~/docky/sonarr4k/configs:/config   # volume mounted configuration folder
+      - /mnt/NAS/4kcontent/shows:/tv       # volume mounted 4K TV
+      - /mnt/NAS/downloads                 # volume mounted downloads
+    ports:
+      - 8889:8989     # port mappings have to be different between installations
+    restart: unless-stopped

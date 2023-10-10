@@ -1,0 +1,31 @@
+---
+version: "2.1"
+services:
+  radarr:     # Normal Resolution Instance (720p/1080p)
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=EST
+    volumes:
+      - ~/docky/radarr/configs:/config    # volume mounted configuration folder
+      - /mnt/NAS/movies:/movies           # volume mounted movies
+      - /mnt/NAS/downloads:/downloads     # volume mounted downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  radarr2:    # 4K Resolution Instance (4K/2160p)
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr4k
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=EST
+    volumes:
+      - ~/docky/radarr4k/configs:/config  # volume mounted configuartion folder
+      - /mnt/NAS/4kcontent/movies:/movies # volume mounted 4K movies
+      - /mnt/NAS/downloads:/downloads     # volume mounted downloads
+    ports:
+      - 7879:7878
+    restart: unless-stopped
