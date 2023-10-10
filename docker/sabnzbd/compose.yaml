@@ -1,0 +1,17 @@
+---
+version: "2.1"
+services:
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    conainer_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=EST
+    volumes:
+      - ~/docky/sab/configs:/config
+      - /mnt/NAS/downloads:/downloads
+      - ~/incompletes:/incomplete-downloads
+    ports:
+      - 8080:8080
+    restart: unless-stopped
