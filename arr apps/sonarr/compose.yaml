@@ -26,7 +26,7 @@ services:
     volumes:
       - ~/docky/sonarr4k/configs:/config   # volume mounted configuration folder
       - /mnt/NAS/4kcontent/shows:/tv       # volume mounted 4K TV
-      - /mnt/NAS/downloads                 # volume mounted downloads
+      - /mnt/NAS/downloads:/downloads      # volume mounted downloads
     ports:
       - 8889:8989     # port mappings have to be different between installations
     restart: unless-stopped
