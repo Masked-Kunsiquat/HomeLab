@@ -3,4 +3,4 @@ YAML file for main prometheus instance
 - gathering info for following services:
     - proxmox
     - docker network (and the containers)
-- funnels into Grafana for dashboards/visuals
+- funnels into Grafana for dashboards/visuals (graphs, tables, etc.)
