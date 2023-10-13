@@ -3,7 +3,7 @@ version: "2.1"
 services:
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
-    conainer_name: sabnzbd
+    container_name: sabnzbd
     environment:
       - PUID=1000
       - PGID=1000
