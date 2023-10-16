@@ -23,6 +23,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=EST
+      - ghcr.io/themepark-dev/theme.park:sonarr      # Theme.Park docker mod (necessary for logo mod)
+      - TP_ADDON=sonarr-4k-logo                      # docker mod for 4k logo
     volumes:
       - ~/docky/sonarr4k/configs:/config   # volume mounted configuration folder
       - /mnt/NAS/4kcontent/shows:/tv       # volume mounted 4K TV

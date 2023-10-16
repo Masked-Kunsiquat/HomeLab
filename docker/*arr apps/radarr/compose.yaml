@@ -22,6 +22,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=EST
+      - ghcr.io/themepark-dev/theme.park:radarr  # Theme.Park docker-mod (needed for logo)
+      - TP_ADDON=radarr-4k-logo                  # docker mod for 4k-lgoo
     volumes:
       - ~/docky/radarr4k/configs:/config  # volume mounted configuartion folder
       - /mnt/NAS/4kcontent/movies:/movies # volume mounted 4K movies
