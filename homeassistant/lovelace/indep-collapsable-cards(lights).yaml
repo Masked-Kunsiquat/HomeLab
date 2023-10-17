@@ -1,0 +1,118 @@
+# Configuration for Home Assistant Lovelace UI
+# Template to create independent collapsable-cards (each entity has a slider and a preselection of colors)
+
+type: vertical-stack
+cards:
+  # Collapsible card for Nightstand controls and colors
+  - type: custom:collapsable-cards
+    title: Nightstand
+    cards:
+      # Entity card for controlling Nightstand light brightness
+      - type: entities
+        entities:
+          - entity: light.Light1        # Be sure to change entities accurately
+            full_row: false
+            name: Nightstand
+            toggle: true
+            type: custom:slider-entity-row
+
+      # Custom RGB light card for selecting Nightstand light colors
+      - type: entities
+        entities:
+          - entity: light.Light1
+            full_row: false
+            name: Nightstand Colors
+            type: custom:rgb-light-card
+            colors:
+              - rgb_color: [255, 255, 255]  # White
+                transition: 1
+              - rgb_color: [210, 180, 140]  # Tan
+                transition: 1
+              - rgb_color: [255, 255, 0]    # Yellow
+                transition: 1
+              - rgb_color: [0, 100, 0]      # Dark Green
+                transition: 1
+              - rgb_color: [0, 0, 128]      # Navy Blue
+                transition: 1
+              - rgb_color: [255, 182, 193]  # Pink
+                transition: 1
+              - rgb_color: [128, 0, 128]    # Purple
+                transition: 1
+              - rgb_color: [255, 0, 0]      # Red
+                transition: 1
+
+  # Collapsible card for Ceiling Light controls and colors
+  - type: custom:collapsable-cards
+    title: Ceiling
+    cards:
+      # Entity card for controlling Ceiling Light brightness
+      - type: entities
+        entities:
+          - entity: light.Light2
+            full_row: false
+            name: Ceiling Light
+            toggle: true
+            type: custom:slider-entity-row
+
+      # Custom RGB light card for selecting Ceiling Light colors
+      - type: entities
+        entities:
+          - entity: light.Light2        # Be sure to change entities accurately
+            full_row: false
+            name: Ceiling Light Colors
+            type: custom:rgb-light-card
+            colors:
+              - rgb_color: [255, 255, 255]  # White
+                transition: 1
+              - rgb_color: [210, 180, 140]  # Tan
+                transition: 1
+              - rgb_color: [255, 255, 0]    # Yellow
+                transition: 1
+              - rgb_color: [0, 100, 0]      # Dark Green
+                transition: 1
+              - rgb_color: [0, 0, 128]      # Navy Blue
+                transition: 1
+              - rgb_color: [255, 182, 193]  # Pink
+                transition: 1
+              - rgb_color: [128, 0, 128]    # Purple
+                transition: 1
+              - rgb_color: [255, 0, 0]      # Red
+                transition: 1
+
+  # Collapsible card for LEDs controls and colors
+  - type: custom:collapsable-cards
+    title: LEDs
+    cards:
+      # Entity card for controlling LEDs brightness
+      - type: entities
+        entities:
+          - entity: light.Light3
+            full_row: false
+            name: LEDs
+            toggle: true
+            type: custom:slider-entity-row
+
+      # Custom RGB light card for selecting LEDs colors
+      - type: entities
+        entities:
+          - entity: light.Light3        # Be sure to change entities accurately
+            full_row: false
+            name: LEDs Colors
+            type: custom:rgb-light-card
+            colors:
+              - rgb_color: [255, 255, 255]  # White
+                transition: 1
+              - rgb_color: [210, 180, 140]  # Tan
+                transition: 1
+              - rgb_color: [255, 255, 0]    # Yellow
+                transition: 1
+              - rgb_color: [0, 100, 0]      # Dark Green
+                transition: 1
+              - rgb_color: [0, 0, 128]      # Navy Blue
+                transition: 1
+              - rgb_color: [255, 182, 193]  # Pink
+                transition: 1
+              - rgb_color: [128, 0, 128]    # Purple
+                transition: 1
+              - rgb_color: [255, 0, 0]      # Red
+                transition: 1
