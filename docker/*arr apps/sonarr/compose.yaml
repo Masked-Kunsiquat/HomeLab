@@ -14,8 +14,8 @@ services:
       - TDARR_DB_ID=${SONARR_TDARR_DB_ID}
       - TDARR_PATH_TRANSLATE=${SONARR_TDARR_TRANSLATE}
     volumes:
-      - ${SONARR_VOL_CONFIG}
-      - ${SONARR_SHARED}
+      - ${SONARR_VOL_CONFIG}:/config
+      - ${SONARR_SHARED}:/data
     ports:
       - 8989:8989                               # port mappings have to be different between installations
     restart: unless-stopped
@@ -39,8 +39,8 @@ services:
       - TDARR_DB_ID=${SONARR4K_TDARR_DB_ID}
       - TDARR_PATH_TRANSLATE=${SONARR4K_TDARR_TRANSLATE}
     volumes:
-      - ${SONARR4K_VOL_CONFIG}
-      - ${SONARR_SHARED}
+      - ${SONARR4K_VOL_CONFIG}:/config
+      - ${SONARR_SHARED}:/data
     ports:
       - 8889:8989                               # port mappings have to be different between installations
     restart: unless-stopped

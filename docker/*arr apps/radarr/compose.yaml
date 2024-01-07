@@ -19,8 +19,8 @@ services:
       - TDARR_DB_ID=${RADARR_TDARR_DB_ID}
       - TDARR_PATH_TRANSLATE=${RADARR_TDARR_TRANSLATE}
     volumes:
-      - ${RADARR_VOL_CONFIG}
-      - ${RADARR_SHARED}
+      - ${RADARR_VOL_CONFIG}:/config
+      - ${RADARR_SHARED}:/data
     ports:
       - 7878:7878				   # differing port mappings
     restart: unless-stopped
@@ -45,8 +45,8 @@ services:
       - TDARR_DB_ID=${RADARR4K_TDARR_DB_ID}
       - TDARR_PATH_TRANSLATE=${RADARR4K_TDARR_TRANSLATE}   
     volumes:
-      - ${RADARR4K_VOL_CONFIG}
-      - ${RADARR_SHARED}
+      - ${RADARR4K_VOL_CONFIG}:/config
+      - ${RADARR_SHARED}:/data
     ports:
       - 7879:7878				# differing port mappings
     restart: unless-stopped
