@@ -1,34 +1,37 @@
----
-version: "2.1"
 services:
   sonarr:     # Normal Resolution Instance (720p/1080p)
-    image: lscr.io/linuxserver/sonarr:latest
+    image: ${SONARR_IMAGE}
+    logging:
+      driver: ${SONARR_DRIVER}
+      options:
+        gelf-address: ${SONARR_GELF_ADDRESS}
     container_name: sonarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=EST
+    env_file:
+       - .env
     volumes:
-      - ~/docky/sonarr/configs:/config     # volume mounted configuration folder
-      - /mnt/NAS/shows:/tv                 # volume mounted TV
-      - /mnt/NAS/downloads:/downloads      # volume mounted downloads
+      - ${SONARR_VOL_CONFIG}
+      - ${SONARR_SHARED}
     ports:
-      - 8989:8989    # port mappings have to be different between installations
+      - 8989:8989                               # port mappings have to be different between installations
     restart: unless-stopped
-  
+
+
+
   sonarr2:    # 4K Resolution (4K/2160p)
-    image: lscr.io/linuxserver/sonarr:latest
+    image: ${SONARR_IMAGE}
+    logging:
+      driver: ${SONARR_DRIVER}
+      options:
+        gelf-address: ${SONARR_GELF_ADDRESS}
     container_name: sonarr4k
+    env_file:
+       - .env
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=EST
-      - ghcr.io/themepark-dev/theme.park:sonarr      # Theme.Park docker mod (necessary for logo mod)
-      - TP_ADDON=sonarr-4k-logo                      # docker mod for 4k logo
+      - DOCKER_MODS=${SONARR4K_MOD}
+      - TP_ADDON=${SONARR4K_TP_ADDON}
     volumes:
-      - ~/docky/sonarr4k/configs:/config   # volume mounted configuration folder
-      - /mnt/NAS/4kcontent/shows:/tv       # volume mounted 4K TV
-      - /mnt/NAS/downloads:/downloads      # volume mounted downloads
+      - ${SONARR4K_VOL_CONFIG}
+      - ${SONARR_SHARED}
     ports:
-      - 8889:8989     # port mappings have to be different between installations
+      - 8889:8989                               # port mappings have to be different between installations
     restart: unless-stopped
