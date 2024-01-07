@@ -2,16 +2,20 @@
 version: "2.1"
 services:
   sabnzbd:
-    image: lscr.io/linuxserver/sabnzbd:latest
+    image: ${SAB_IMAGE}
+    logging:
+      driver: ${SAB_DRIVER}
+      options:
+        gelf-address: ${SAB_GELF_ADDRESS}
     container_name: sabnzbd
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=EST
+      - PUID=${SAB_PUID}
+      - PGID=${SAB_PGID}
+      - TZ=${SAB_TZ}
     volumes:
-      - ~/docky/sab/configs:/config
-      - /mnt/NAS/downloads:/downloads
-      - ~/incompletes:/incomplete-downloads
+      - ${SAB_VOL_CONFIG}:/config
+      - ${SAB_VOL_INCOMPLETE}:/incomplete-downloads
+      - ${SAB_SHARED} 
     ports:
-      - 8080:8080
+      - 9090:8080
     restart: unless-stopped
