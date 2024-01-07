@@ -10,8 +10,11 @@ services:
       - TZ=${BAZARR_TZ}
     volumes:
       - ${BAZARR_VOL_CONFIG}:/config          # volume mounted configuration folder
-      - ${BAZARR_VOL_MOVIES}:/movies          # volume mounted movies
-      - ${BAZARR_VOL_TV}:/tv                  # volume mounted TV
+      - ${BAZARR_SHARED}
+    logging:
+      driver: ${BAZARR_DRIVER}
+      options:
+        gelf-address: ${BAZARR_GELF_ADDRESS}
     ports:
       - 6767:6767    # port mappings have to be different between installations
     restart: unless-stopped
@@ -23,10 +26,15 @@ services:
       - PUID=${BAZARR4K_PUID}
       - PGID=${BAZARR4K_PGID}
       - TZ=${BAZARR_TZ}
+      - DOCKER_MODS=${BAZARR4K_DOCKER_MOD}
+      - TP_ADDON=${BAZARR4K_TP_ADDON}
     volumes:
       - ${BAZARR4K_VOL_CONFIG}:/config       # volume mounted configuration folder
-      - ${BAZARR4K_VOL_MOVIES}:/movies       # volume mounted movies
-      - ${BAZARR4K_VOL_TV}:/tv               # volume mounted 4K TV
+      - ${BAZARR_SHARED} 
+    logging:
+      driver: ${BAZARR_DRIVER}
+      options:
+        gelf-address: ${BAZARR_GELF_ADDRESS}
     ports:
       - 6769:6767     # port mappings have to be different between installations
     restart: unless-stopped
