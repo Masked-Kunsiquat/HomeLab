@@ -6,8 +6,13 @@ services:
       options:
         gelf-address: ${SONARR_GELF_ADDRESS}
     container_name: sonarr
-    env_file:
-       - .env
+    environment:
+      - PUID=${SONARR_PUID}
+      - PGID=${SONARR_PGID}
+      - TZ=${SONARR_TZ}
+      - TDARR_URL=${TDARR_URL}
+      - TDARR_DB_ID=${SONARR_TDARR_DB_ID}
+      - TDARR_PATH_TRANSLATE=${SONARR_TDARR_TRANSLATE}
     volumes:
       - ${SONARR_VOL_CONFIG}
       - ${SONARR_SHARED}
@@ -24,11 +29,15 @@ services:
       options:
         gelf-address: ${SONARR_GELF_ADDRESS}
     container_name: sonarr4k
-    env_file:
-       - .env
     environment:
-      - DOCKER_MODS=${SONARR4K_MOD}
+      - PUID=${SONARR4K_PUID}
+      - PGID=${SONARR4K_PGID}
+      - TZ=${SONARR_TZ}
+      - DOCKER_MODS=${SONARR4K_DOCKER_MOD}
       - TP_ADDON=${SONARR4K_TP_ADDON}
+      - TDARR_URL=${TDARR_URL}
+      - TDARR_DB_ID=${SONARR4K_TDARR_DB_ID}
+      - TDARR_PATH_TRANSLATE=${SONARR4K_TDARR_TRANSLATE}
     volumes:
       - ${SONARR4K_VOL_CONFIG}
       - ${SONARR_SHARED}
