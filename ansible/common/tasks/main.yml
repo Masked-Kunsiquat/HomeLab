@@ -1,2 +1,5 @@
 ---
-# tasks file for common
+- name: "Create master .env file."
+  template:
+    src: "env."
+    dest: "{{ base_docker }}/.env"

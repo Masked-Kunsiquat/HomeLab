@@ -1,0 +1,10 @@
+---
+- name: "Ensure Authenik directory exists."
+  file:
+    path: "{{ authentik_dir }}"
+    state: directory
+    
+- name: "Create Authentik compose file."
+  template:
+    src: compose-authentik.j2
+    dest: "{{ authentik_dir }}/compose.yaml"
