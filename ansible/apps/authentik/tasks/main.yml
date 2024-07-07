@@ -1,10 +1,10 @@
 ---
-- name: "Ensure Authenik directory exists."
-  file:
+- name: Ensure Authenik directory exists.
+  ansible.builtin.file:
     path: "{{ authentik_dir }}"
     state: directory
-    
-- name: "Create Authentik compose file."
-  template:
+
+- name: Create Authentik compose file.
+  ansible.builtin.template:
     src: compose-authentik.j2
     dest: "{{ authentik_dir }}/compose.yaml"
