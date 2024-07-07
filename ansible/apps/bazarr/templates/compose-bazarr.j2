@@ -1,0 +1,46 @@
+version: "2.1"
+services:
+  bazarr:
+    # Normal Resolution Instance (720p/1080p)
+    image: ${BAZARR_IMAGE}
+    container_name: bazarr
+    environment:
+      - PUID=${BAZARR_PUID}
+      - PGID=${BAZARR_PGID}
+      - TZ=${BAZARR_TZ}
+    volumes:
+      - ${BAZARR_VOL_CONFIG}:/config # volume mounted configuration folder
+      - ${BAZARR_SHARED}
+    logging:
+      driver: ${BAZARR_DRIVER}
+      options:
+        gelf-address: ${BAZARR_GELF_ADDRESS}
+    env_file:
+      - {{ base_docker }}/.env
+    ports:
+      - 6767:6767 # port mappings have to be different between installations
+    restart: unless-stopped
+
+
+  bazarr2:
+    # 4K Resolution (4K/2160p)
+    image: ${BAZARR_IMAGE}
+    container_name: bazarr4k
+    environment:
+      - PUID=${BAZARR4K_PUID}
+      - PGID=${BAZARR4K_PGID}
+      - TZ=${BAZARR_TZ}
+      - DOCKER_MODS=${BAZARR4K_DOCKER_MOD}
+      - TP_ADDON=${BAZARR4K_TP_ADDON}
+    volumes:
+      - ${BAZARR4K_VOL_CONFIG}:/config # volume mounted configuration folder
+      - ${BAZARR_SHARED}
+    logging:
+      driver: ${BAZARR_DRIVER}
+      options:
+        gelf-address: ${BAZARR_GELF_ADDRESS}
+    env_file:
+      - {{ base_docker }}/.env
+    ports:
+      - 6769:6767 # port mappings have to be different between installations
+    restart: unless-stopped
