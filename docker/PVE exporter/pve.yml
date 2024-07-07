@@ -1,5 +1,0 @@
-default:
-  user: prometheus@pam
-  token_name: "exporter"
-  token_value: !secret prom_pve_token
-  verify_ssl: false
