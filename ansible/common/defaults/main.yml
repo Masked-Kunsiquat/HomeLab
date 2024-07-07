@@ -18,10 +18,12 @@ bazarr_driver: "gelf"
 bazarr_gelf_address: ""
 bazarr_image: "lscr.io/linuxserver/bazarr:latest"
 
+bazarr_dir: "{{ base_docker }}/bazarr"
 bazarr_puid: "1000"
 bazarr_pgid: "1000"
 bazarr_config_volume: "{{ base_docker }}/bazarr/config"
 
+bazarr4k_dir: "{{ base_docker }}/bazarr4k"
 bazarr4k_puid: "1000"
 bazarr4k_pgid: "1000"
 bazarr4k_config_volume: "{{ base_docker }}/bazarr4k/config"

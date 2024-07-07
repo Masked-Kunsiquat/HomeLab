@@ -1,0 +1,13 @@
+---
+- name: "Ensure Bazarr directories exist."
+  file:
+    path: "{{ item.path }}"
+    state: directory
+  loop:
+    - { path: "{{ bazarr_dir }}"}
+    - { path: "{{ bazarr4k_dir}}"}
+
+- name: "Create Bazarr compose file."
+  template:
+    src: "compose-bazarr.j2"
+    dest: "{{ bazarr_dir }}/compose.yaml"
