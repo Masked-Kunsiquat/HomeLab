@@ -12,7 +12,7 @@ authenik_gunicorn_cmd_args: "--timeout=90"
 # ARR Docker shared configuration
 arr_docker_timezone: "America/New_York"
 arr_docker_shared_volume: ""
-
+# ~~~~~~~~~~~~~~~~~~~~~
 # Bazarr variables
 bazarr_driver: "gelf"
 bazarr_gelf_address: ""
@@ -29,4 +29,9 @@ bazarr4k_pgid: "1000"
 bazarr4k_config_volume: "{{ base_docker }}/bazarr4k/config"
 bazarr4k_docker_mods: "ghcr.io/themepark-dev/theme.park:bazarr"
 bazarr4k_tp_addons: "bazarr-4k-logo"
+# ~~~~~~~~~~~~~~~~~~~~~
+# Radarr variables
+
+# ~~~~~~~~~~~~~~~~~~~~~
+# Sonarr variables
 # ----------------------------------------------------------------
