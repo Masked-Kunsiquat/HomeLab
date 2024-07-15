@@ -1,0 +1,173 @@
+# suitecrm/tasks/main.yaml
+---
+- name: Install necessary packages for webserver and database
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apache2
+    - unzip
+    - wget
+    - php
+    - php-mysql
+    - libapache2-mod-php
+    - mysql-server
+    - python3-mysqldb
+  register: apt_install
+  failed_when: apt_install is failed
+
+- name: Start and enable Apache
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+  register: apache_service
+  failed_when: apache_service.state != 'started'
+  notify: Restart Apache
+
+- name: Start and enable MySQL
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  register: mysql_service
+  failed_when: mysql_service.state != 'started'
+
+- name: Secure MySQL installation
+  mysql_secure_installation:
+    login_user: root
+    login_password: ''
+    new_password: "{{ db_root_password }}"
+    root_password_changed: true
+    remove_anonymous_users: true
+    disallow_root_login_remotely: true
+    remove_test_db: true
+    state: present
+  register: mysql_secure
+  failed_when: mysql_secure is failed
+
+- name: Create MySQL database
+  mysql_db:
+    name: "{{ db_name }}"
+    state: present
+    login_user: root
+    login_password: "{{ db_root_password }}"
+  register: create_db
+  failed_when: create_db is failed
+
+- name: Create MySQL user
+  mysql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    priv: "{{ db_name }}.*:ALL"
+    state: present
+    login_user: root
+    login_password: "{{ db_root_password }}"
+  register: create_user
+  failed_when: create_user is failed
+
+- name: Download SuiteCRM package
+  get_url:
+    url: "{{ suitecrm_download_url }}"
+    dest: /tmp/suitecrm.zip
+  register: download_suitecrm
+  failed_when: download_suitecrm.status_code != 200
+
+- name: Unzip SuiteCRM package
+  unarchive:
+    src: /tmp/suitecrm.zip
+    dest: /tmp/
+    remote_src: yes
+  register: unzip_suitecrm
+  failed_when: unzip_suitecrm is failed
+
+- name: Copy files to webserver root
+  copy:
+    src: /tmp/SuiteCRM-*
+    dest: "{{ web_root }}"
+    remote_src: yes
+  register: copy_files
+  failed_when: copy_files is failed
+
+- name: Set directory permissions
+  find:
+    paths: "{{ web_root }}"
+    recurse: yes
+    file_type: directory
+  register: dir_permissions
+  failed_when: dir_permissions is failed
+
+- name: Set file permissions
+  find:
+    paths: "{{ web_root }}"
+    recurse: yes
+    file_type: file
+  register: file_permissions
+  failed_when: file_permissions is failed
+
+- name: Apply directory permissions
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: '2755'
+  loop: "{{ dir_permissions.files }}"
+  register: apply_dir_perms
+  failed_when: apply_dir_perms is failed
+
+- name: Apply file permissions
+  file:
+    path: "{{ item.path }}"
+    state: file
+    mode: '0644'
+  loop: "{{ file_permissions.file }}"
+  register: apply_file_perms
+  failed_when: apply_file_perms is failed
+
+- name: Change ownerships to webserver user
+  command: chown -R {{ web_user }}:{{ web_group }} {{ web_root }}
+  register: change_ownership
+  failed_when: change_ownership is failed
+
+- name: Make console executable
+  file:
+    path: "{{ web_root }}/bin/console"
+    mode: '0755'
+  register: make_console_exec
+  failed_when: make_console_exec is failed
+
+- name: Configure Apache virtual host
+  template:
+    src: suitcrm.conf.j2
+    dest: /etc/apache2/site-available/suitecrm.conf
+  register: configure_vhost
+  failed_when: configure_vhost is failed
+  notify: Restart Apache
+
+- name: Enable Apache site
+  command: a2ensite suitecrm.conf
+  register: enable_site
+  failed_when: enable_site.rc != 0
+  notify: Restart Apache
+
+- name: Disable default Apache site
+  command: a2dissite 000-default.conf
+  register: disable_default_site
+  failed_when: disable_default_site.rc != 0
+  notify: Restart Apache
+
+- name: Enable mod_rewrite
+  command: a2enmod_rewrite
+  register: enable_mod_rewrite
+  failed_when: enable_mod_rewrite.rc != 0
+  notify: Restart Apache
+
+- name: Run CLI installer (optional)
+  command: "{{ web_root }}/bin/console suitecrm:app:install"
+  when: run_cli_installer is defined and run_cli_installer
+  register: run_cli_installer_cmd
+  failed_when: run_cli_installer_cmd is failed
+
+- name: Run UI installer (optional)
+  debug:
+    msg: "Please complete the installation via the webUI at your server's address."
+  when: run_cli_installer is not defined or not run_cli_installer
