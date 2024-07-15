@@ -1,5 +1,0 @@
----
-- hosts: ""
-  become: yes
-    roles:
-      - suitecrm
