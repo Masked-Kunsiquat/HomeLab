@@ -23,13 +23,17 @@ RUN npm install
 COPY .env .env
 
 # Copy Decap CMS config to cState
-COPY config.yml static/admin/config.yml
+COPY static/admin/config.yml static/admin/config.yml
+
+# Copy custom pages
+COPY src/pages src/pages
 
 # Install Decap CMS
 RUN npm install netlify-cms-app
 
-# Expost necessary port
+# Expose necessary port
 EXPOSE 8000
 
 # Command to run cState and Decap CMS
-CMD [ "gatsby", "develop", "-H", "0.0.0.0" ]
+CMD ["gatsby", "develop", "-H", "0.0.0.0"]
+
