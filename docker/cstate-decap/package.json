@@ -1,0 +1,35 @@
+{
+    "name": "cstate-decapcms",
+    "version": "1.0.0",
+    "description": "A Gatsby-based cState project with Decap CMS integration",
+    "main": "gatsby-config.js",
+    "scripts": {
+      "develop": "gatsby develop",
+      "build": "gatsby build",
+      "serve": "gatsby serve",
+      "clean": "gatsby clean"
+    },
+    "dependencies": {
+      "gatsby": "^4.0.0",
+      "gatsby-plugin-netlify-cms": "^6.0.0",
+      "netlify-cms-app": "^2.15.0",
+      "react": "^18.0.0",
+      "react-dom": "^18.0.0",
+      "dotenv": "^10.0.0"
+    },
+    "devDependencies": {
+      "eslint": "^7.32.0",
+      "prettier": "^2.4.1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Masked-Kunsiquat/HomeLab.git"
+    },
+    "author": "Your Name",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/Masked-Kunsiquat/HomeLab/issues"
+    },
+    "homepage": "https://github.com/Masked-Kunsiquat/HomeLab#readme"
+  }
+  
