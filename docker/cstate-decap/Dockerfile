@@ -36,3 +36,4 @@ EXPOSE 8000
 
 # Command to run cState and Decap CMS
 CMD ["gatsby", "develop", "-H", "0.0.0.0"]
+
