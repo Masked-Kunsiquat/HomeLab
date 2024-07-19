@@ -1,0 +1,12 @@
+version: '1.0'
+
+services:
+  cstate-decapcms:
+    image: "" # (your-dockerhub-username/cstate-decapcms:latest)
+    ports:
+      - 8000:8000
+    volumes:
+      - ./content:/usr/src/app/cstate/content
+      - ./static/media:/usr/src/app/cstate/static/media
+    environment:
+      - GIT_GATEWAY_TOKEN=${GIT_GATEWAY_TOKEN}
