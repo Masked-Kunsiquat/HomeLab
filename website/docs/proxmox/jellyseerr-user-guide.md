@@ -10,7 +10,7 @@ This allows you to:
 > - [request any media (movies or tv shows)](jellyseerr-user-guide#Requesting%20content)
 > - [search for new (hopefully interesting) content](jellyseerr-user-guide#Searching%20for%20content)
 > - view pending (and completed) requests
-> - [report issues with content](jellyseer-user-guide#Reporting%20issues)
+> - [report issues with content](jellyseer-user-guide#Reporting%20Issues)
 
 All of this gets funneled to me via push notification to take action (e.g. investigating streaming errors). This will simplify management of the media server as the content grows.
 
