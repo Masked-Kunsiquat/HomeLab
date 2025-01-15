@@ -4,13 +4,13 @@ tags:
     - jellyfin
 ---
 # Summary
-> **Jellyseerr** is a free and open-source application to manage the tracking of media requests.
+[**Jellyseerr**](https://docs.jellyseerr.dev/) is a free and open-source application to manage the tracking of media requests.
 This allows you to:
 > 
 > - [request any media (movies or tv shows)](jellyseerr-user-guide#requesting-content)
-> - [search for new (hopefully interesting) content](jellyseerr-user-guide#Searching%20for%20content)
+> - [search for new (hopefully interesting) content](jellyseerr-user-guide#searching-for-content)
 > - view pending (and completed) requests
-> - report issues with content
+> - [report issues with content](jellyseerr-user-guide#reporting-issues)
 
 All of this gets funneled to me via push notification to take action (e.g. investigating streaming errors). This will simplify management of the media server as the content grows.
 
@@ -26,8 +26,8 @@ All of this gets funneled to me via push notification to take action (e.g. inves
 ## Home Page
 
 ![Main Screen](img/jellyseerr/main-screen.png)
-> Content with a green checkmark are available in Jellyfin. 
-> Content with a white line in a green circle are partially available in Jellyfin.
+> - Content with a green checkmark are available in Jellyfin. ✅
+> - Content with a white line in a green circle are partially available in Jellyfin.
 
 ---
 
