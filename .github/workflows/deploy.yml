@@ -16,13 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          cache-dependency-path: subdir/package-lock.json
           fetch-depth: 0
 
       - name: Setup node for website
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache-dependency-path: website/package-lock.json
           cache: npm
 
       - name: Install dependencies
