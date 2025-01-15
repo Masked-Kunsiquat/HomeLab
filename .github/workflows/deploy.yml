@@ -9,6 +9,9 @@ jobs:
   deploy:
     name: Deploy Docusaurus
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./website/
 
     steps:
       - uses: actions/checkout@v4
