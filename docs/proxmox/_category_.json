@@ -1,8 +1,0 @@
-{
-  "label": "Proxmox VE",
-  "position": 3,
-  "link": {
-    "type": "generated-index",
-    "description": "Proxmox Virtual Environment is an open source server virtualization management solution based on QEMU/KVM and LXC."
-  }
-}
