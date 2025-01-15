@@ -1,5 +1,0 @@
----
-- name: Create master .env file.
-  ansible.builtin.template:
-    src: env.
-    dest: "{{ base_docker }}/.env"

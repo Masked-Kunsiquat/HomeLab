@@ -1,8 +1,0 @@
-# suitecrm/handlers/main.yaml
----
-- name: Restart Apache
-  service:
-    name: apache2
-    state: restarted
-
-  
