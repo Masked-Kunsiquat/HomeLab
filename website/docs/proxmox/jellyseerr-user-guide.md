@@ -7,7 +7,7 @@ tags:
 > **Jellyseerr** is a free and open-source application to manage the tracking of media requests.
 This allows you to:
 > 
-> - [request any media (movies or tv shows)](jellyseerr-user-guide#Requesting%20content)
+> - [request any media (movies or tv shows)](jellyseerr-user-guide#requesting-content)
 > - [search for new (hopefully interesting) content](jellyseerr-user-guide#Searching%20for%20content)
 > - view pending (and completed) requests
 > - report issues with content
